@@ -1,0 +1,322 @@
+# 📄 AI-INSTRUCTIONS.md 
+
+```markdown
+# AI Development Instructions – IsoLens
+
+## 📌 Project Overview
+
+IsoLens is a lightweight academic malware sandbox prototype designed to execute suspicious files inside an isolated virtual machine and generate structured behavioral analysis reports.
+
+The system is modular, extensible, and intentionally simple. It is not production-grade and should not be over-engineered.
+
+The architecture is organized under the `core/` directory to maintain logical separation between system layers.
+
+---
+
+# 🏗 Project Structure
+
+```
+
+.
+├── core/
+│   ├── agent/
+│   ├── controller/
+│   ├── gateway/
+│   ├── interface/
+│   ├── modules/
+│   ├── observer/
+│   ├── storage/
+│   │   ├── database/
+│   │   ├── logs/
+│   │   ├── reports/
+│   │   └── samples/
+│   └── threatintelligence/
+├── docs/
+│   ├── ARCHITECTURE.md
+│   └── IDEA.md
+├── SandboxShare/
+├── README.md
+├── LICENSE
+└── CONTRIBUTING.md
+
+```
+
+---
+
+# 📁 Component Responsibilities
+
+## `core/interface/`
+Handles all user-facing logic:
+- File upload UI
+- Report display
+- Risk score visualization
+- Screenshot rendering
+
+No VM or analysis logic must exist here.
+
+---
+
+## `core/gateway/`
+System entry layer:
+- API endpoints
+- Request validation
+- Routes requests to controller
+- Returns results to interface
+
+Acts as the communication bridge between UI and system core.
+
+---
+
+## `core/controller/`
+Central workflow coordinator:
+- Restore VM snapshot
+- Start / stop VM
+- Inject file into VM
+- Trigger execution
+- Call observer
+- Collect logs
+- Call modules
+- Call threatintelligence
+- Store results
+
+This is the orchestration brain of IsoLens.
+
+---
+
+## `core/modules/`
+Functional processing layer.
+
+Contains expandable submodules such as:
+- Log parsing
+- IOC extraction
+- Risk scoring
+- YARA rule generation
+- Pattern detection utilities
+
+This layer converts raw monitoring data into structured findings.
+
+This folder is intentionally named "modules" to allow future expansion without structural refactoring.
+
+---
+
+## `core/observer/`
+Behavioral monitoring layer:
+- Process tracking
+- Network monitoring
+- File system monitoring
+- Registry observation
+- Screenshot capture
+- Sysmon log extraction
+
+Each monitoring mechanism may exist as its own submodule.
+
+This layer only collects data — it does not interpret it.
+
+---
+
+## `core/agent/`
+Guest-side API service:
+- Runs inside the isolated container/VM
+- Gathers execution logs and tool outputs
+- Provides internal monitoring hooks
+- Acts as the primary collection point inside the sandbox
+
+---
+
+## `core/threatintelligence/`
+AI-assisted intelligence layer:
+- Natural language summaries
+- Threat classification
+- Risk explanation
+- Intelligence enrichment
+- AI-driven report augmentation
+
+This layer operates on structured findings from `modules/`, not raw logs.
+
+---
+
+## `core/storage/`
+Persistent storage layer.
+
+### Subdirectories:
+
+- `database/` → SQLite or structured data store
+- `samples/` → Uploaded suspicious files
+- `logs/` → Raw execution logs
+- `reports/` → Final analysis outputs
+
+No business logic must exist here.
+
+---
+
+# 🤖 AI Development Rules
+
+These rules must always be followed when generating or modifying code.
+
+---
+
+## 1️⃣ Architecture Update Rule
+
+When adding:
+- New features
+- New modules
+- Workflow changes
+- Structural modifications
+
+The AI MUST:
+- Update this `AI-INSTRUCTIONS.md`
+- Update `docs/ARCHITECTURE.md` if needed
+- Reflect changes in component responsibility sections
+
+Never allow architecture drift.
+
+---
+
+## 2️⃣ Mandatory Testing Policy
+
+After ANY code change:
+
+1. Ensure a `tests/` directory exists at project root.
+2. Each test must be a standalone script.
+3. Naming format:
+
+```
+
+TEST_{number}_{short_description}.py
+
+```
+
+Example:
+
+```
+
+TEST_01_controller_flow.py
+TEST_02_log_parsing.py
+TEST_03_risk_scoring.py
+
+```
+
+Each test script must:
+- Run independently
+- Print PASS or FAIL
+- Provide minimal diagnostic output
+
+Example:
+
+```
+
+[TEST_01_controller_flow] PASS
+
+```
+
+or
+
+```
+
+[TEST_02_log_parsing] FAIL
+Reason: No network events parsed
+
+```
+
+---
+
+## 3️⃣ Mandatory Test Execution Rule
+
+After implementing a feature:
+
+- Run all tests.
+- If ANY test fails:
+  - Fix the issue.
+  - Re-run tests.
+  - Repeat until all tests pass.
+
+Never stop after a failed test.
+
+---
+
+## 4️⃣ Dependency Management
+
+- Always update `requirements.txt` when new libraries are added.
+- Prefer maintained and stable packages.
+- Avoid deprecated APIs.
+- Keep dependencies minimal.
+
+---
+
+## 5️⃣ Git Safety & Hygiene
+
+Always ensure:
+
+- Sensitive files are ignored.
+- Large binaries are ignored.
+- Logs are ignored.
+- Databases are ignored.
+- VM artifacts are ignored.
+- `.env` files are ignored.
+
+Ensure `.gitignore` includes:
+
+```
+
+core/storage/logs/
+core/storage/samples/
+core/storage/database/
+*.vdi
+*.iso
+.env
+**pycache**/
+
+```
+
+Never commit sensitive or large artifacts.
+
+---
+
+## 6️⃣ Separation of Concerns Rule
+
+- No VM logic outside `controller/`
+- No AI logic outside `threatintelligence/`
+- No parsing logic outside `modules/`
+- No monitoring logic outside `observer/`
+- No storage logic outside `storage/`
+- No UI logic outside `interface/`
+
+Maintain clean boundaries.
+
+---
+
+## 7️⃣ Development Philosophy
+
+IsoLens is:
+
+- Academic
+- Modular
+- Lightweight
+- Expandable
+- Educational
+
+Do not:
+- Introduce microservices
+- Add unnecessary abstraction
+- Add heavy infrastructure
+- Overcomplicate logic
+
+Keep it readable and structured.
+
+---
+
+# 📌 Final AI Checklist Before Completing Work
+
+Before finalizing any change:
+
+✔ Update AI-INSTRUCTIONS.md if architecture changed  
+✔ Update docs/ARCHITECTURE.md if needed  
+✔ Add isolated test scripts  
+✔ Run all tests  
+✔ Ensure all tests PASS  
+✔ Update requirements.txt if required  
+✔ Verify .gitignore safety  
+
+No exceptions.
+```
+
