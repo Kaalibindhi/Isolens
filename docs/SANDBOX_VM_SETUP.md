@@ -119,7 +119,7 @@ After reboot, clipboard sharing and drag‑and‑drop should work between host a
 3. A command window will open with several activation options.  
    - The option highlighted in **green** is the recommended one (usually option **1** for HWID activation, which permanently activates Windows 7 based on your hardware).  
    - Type the corresponding number and press **Enter**.
-
+![Windows 7 Mass ](win7_mas.png)
 4. The script will run automatically. Wait for it to complete – you’ll see messages indicating success.
 
 5. Once finished, close the command window and **restart the VM**.
