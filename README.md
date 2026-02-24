@@ -39,5 +39,3 @@ The `scripts/` directory contains utility scripts for project maintenance:
 - [ATHUL PRAKASH NJ](https://github.com/psychoSherlock/)
 - [AARON PAUL BIJU](https://github.com/aaronpaulbiju/)
 - [ADITHI ASOK](https://github.com/kaalibindhi/)
-
-Testing..
