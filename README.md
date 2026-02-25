@@ -28,6 +28,7 @@ Detailed information can be found in the `docs/` folder:
 - [**Architecture Overview**](docs/ARCHITECTURE.md): Technical breakdown of the modular system design and component responsibilities.
 - [**Project Idea & Concept**](docs/IDEA.md): The core vision, problem statement, and proposed workflow for the automated sandbox.
 - [**Sandbox VM Setup**](docs/SANDBOX_VM_SETUP.md): A comprehensive guide on setting up the isolated Windows 7 analysis environment.
+- [**UI Components Plan**](docs/UI_COMPONENT_PLAN.md): Complete UI components Plan
 
 ## 🛠 Scripts
 
