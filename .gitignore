@@ -9,3 +9,7 @@ core/storage/database/
 core/interface/node_modules/
 core/interface/.next/
 core/interface/out/
+
+# SandboxShare large artifacts
+SandboxShare/*.zip
+SandboxShare/System Volume Information/
